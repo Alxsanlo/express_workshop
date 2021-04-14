@@ -3,8 +3,24 @@ const pokemon = express.Router()
 //const pk = require('../pokedex.json').pokemon;
 const db = require('../config/database');
 
-pokemon.post("/", (req, res, next) =>{
-	return res.status(200).json(req.body);
+pokemon.post("/", async (req, res, next) =>{
+	const { pok_name, pok_height, pok_weight, pok_base_experience} = req.body;
+	if(pok_name && pok_height && pok_weight && pok_base_experience){
+		let query = "INSERT INTO pokemon( pok_name, pok_height, pok_weight, pok_base_experience)";
+
+		query += ` VALUES('${pok_name}', '${pok_height}', '${pok_weight}', '${pok_base_experience}')`;
+
+		const rows = await db.query(query);
+		console.log(rows);
+
+		if(rows.affectedRows == 1){
+			return res.status(201).json({code: 201, message: "Pokemon insetado correctamente"});
+		}
+		return res.status(500).json({code: 500, message: "Ocurrió un error"});
+	}
+	
+	return res.status(500).json({code: 500, message: "Campos incompletos"});
+	
 });
 
 pokemon.get('/', async (req, res, next) =>{
