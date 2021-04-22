@@ -1,5 +1,6 @@
 const express = require('express');
 const pokemon = express.Router()
+
 //const pk = require('../pokedex.json').pokemon;
 const db = require('../config/database');
 
