@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 //const pk = require('../pokedex.json').pokemon;
 const db = require('../config/database');
 
-user.post("/", async (req, res, next) => {
+user.post("/signin", async (req, res, next) => {
 
 	const { user_name, user_mail, user_password } = req.body;
 
