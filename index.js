@@ -29,10 +29,7 @@ PUT		- Modificar un recurso completo.
 DELETE	- Borrar un recurso.
 */
 
-app.get("/", (req, res, next) => {
-	res.status(200);
-	res.send("Bienvenido al Pokedex");
-});
+app.get("/", index);
 
 app.use("/user", user);
 
